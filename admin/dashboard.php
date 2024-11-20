@@ -2,6 +2,10 @@
 require '../functions.php';
 guardDashboard();
 
+
+
+
+
 $logoutPage = 'logout.php';
 $subjectPage = './subject/add.php';
 $studentPage = './student/register.php';
