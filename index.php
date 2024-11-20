@@ -4,8 +4,6 @@ guardLogin();
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
