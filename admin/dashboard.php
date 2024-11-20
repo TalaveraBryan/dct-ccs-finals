@@ -1,3 +1,10 @@
+<?php
+include 'header.php';  // Include header.php at the top of the page
+
+include 'footer.php';  // Include footer.php at the bottom of the page
+?>
+
+
 <!-- Template Files here -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-5">    
     <h1 class="h2">Dashboard</h1>        

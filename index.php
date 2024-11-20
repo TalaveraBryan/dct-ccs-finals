@@ -1,3 +1,56 @@
+<?php
+// Include the login function and database connection function
+// Use include_once or require_once to prevent multiple inclusions
+include_once('functions.php');  // Ensure that functions.php is included only once
+
+// Call the handleLogin function and get the result
+$loginResult = handleLogin();
+
+// Extract variables from the login result array
+$email = $loginResult['email'];
+$password = $loginResult['password'];
+$emailErr = $loginResult['emailErr'];
+$passwordErr = $loginResult['passwordErr'];
+$loginError = $loginResult['loginError'];
+$errorDetails = $loginResult['errorDetails'];
+
+// Proceed if there are no login errors
+if (empty($errorDetails)) {
+    // Call the connectDb() function to establish a database connection
+    $conn = connectDb();
+
+    // Example: Safe query using prepared statements to prevent SQL injection
+    $sql = "SELECT id, email, name FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);  // Prepare the SQL statement
+    $stmt->bind_param("s", $email);  // Bind the email parameter (s means string)
+    $stmt->execute();  // Execute the prepared statement
+
+    // Get the result of the query
+    $queryResult = $stmt->get_result();
+
+    if ($queryResult->num_rows > 0) {
+        // Output data of each row
+        while($row = $queryResult->fetch_assoc()) {
+            echo "id: " . $row["id"] . " - Email: " . $row["email"] . " - Name: " . $row["name"] . "<br>";
+        }
+    } else {
+        echo "No results found.";
+    }
+
+    // Close the prepared statement and connection
+    $stmt->close();
+    $conn->close();
+} else {
+    // Display login errors
+    echo $loginError . "<br>";
+    foreach ($errorDetails as $error) {
+        echo $error . "<br>";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
