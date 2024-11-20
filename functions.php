@@ -30,7 +30,7 @@ function getConnection()
     $host = 'localhost'; // Replace with your host
     $dbName = 'dct-ccs-finals'; // Replace with your database name
     $username = 'root'; // Replace with your username
-    $password = 'root'; // Replace with your password
+    $password = ''; // Replace with your password
     $charset = 'utf8mb4'; // Recommended for UTF-8 support
 
     try {
@@ -125,5 +125,25 @@ function displayErrors($errors)
 
     return $errorHtml;
 }
+
+
+function logout($indexPage) {
+    // Unset the 'email' session variable
+    unset($_SESSION['email']);
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page (index.php)
+    header("Location: $indexPage");
+    exit;
+}
+
+
+
+
+
+
+
 
 ?>
